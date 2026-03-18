@@ -5,7 +5,46 @@ description: Full 5-phase planning pipeline. Run this skill when a new feature i
 
 # plan-feature Skill
 
-Run this skill when a feature is requested. Do not write any code until Phase 5 produces plan.md and the orchestrator has run parallel-session.
+Run this skill when a feature is requested. Do not write any code until Phase 5 (or the Quick Path) produces plan.md and the orchestrator has run parallel-session.
+
+## Phase 0 — Scale Check
+
+Answer all four questions before starting:
+
+1. Is this a **bug fix, typo, copy change, or config tweak** — NOT a new feature or new behaviour?
+2. Will it touch **≤3 files** total?
+3. Does it require **NO new API endpoints, routes, or schema columns**?
+4. Does it touch **NO shared `packages/` files**?
+
+**If any answer is "no" or "maybe" → use the Full Pipeline (Phase 1 below). Do not try to force it into the Quick Path.**
+
+If ALL four are an unambiguous "yes" → use the Quick Path below.
+
+---
+
+### Quick Path (small tasks only — all 4 checks must be YES)
+
+1. **Write a mini-spec** (5–10 lines max) directly in the session — no file needed:
+   - What: one sentence describing the change
+   - Why: one sentence (bug report, user feedback, etc.)
+   - ACs: 2–4 assertions only (e.g., "clicking X does Y", "field Z accepts empty string without error")
+   - Files to change: explicit list (≤3 files)
+
+2. **Pause and check for hidden complexity.** Ask yourself: does writing the mini-spec reveal any ambiguity, side effects, or unknowns? If yes — abort Quick Path, use Full Pipeline.
+
+3. **Implement directly.** For a ≤3-file change with clear ACs, the orchestrator or a single specialist agent can implement inline. No T1 tester dispatch needed for trivial one-liner fixes, but write at least 1 test assertion for any logic change.
+
+4. **Quick review.** After implementing, re-read the 2–4 ACs and confirm each is met. No gateway.md needed.
+
+5. **Commit and done.** No session file, no worktree, no plan.md needed for Quick Path.
+
+**Abort to Full Pipeline immediately if:**
+- The implementation touches a 4th file
+- A schema or API change turns out to be needed
+- Any AC cannot be verified with certainty
+- The fix introduces a new behaviour (not just restoring a broken one)
+
+---
 
 ## Phase 1 — Spec Draft (Orchestrator)
 

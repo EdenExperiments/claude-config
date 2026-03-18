@@ -36,13 +36,15 @@ Available in every project via `~/.claude/agents/`:
 
 | Skill | When to use |
 |-------|------------|
-| `plan-feature` | New feature request → 5-phase pipeline (spec → reviews → gateway → plan) |
+| `plan-feature` | New feature request → Phase 0 scale check, then quick path or full 5-phase pipeline |
 | `execute-plan` | Approved plan → Agent Teams execution with TDD gate |
 | `tdd-first` | T1 task → write failing tests from spec ACs before any implementation |
 | `use-context7` | Before writing any third-party library API call |
 | `parallel-session` | Before starting a feature session → register zone, create worktree |
 | `abandon-feature` | Feature cancelled/interrupted → archive and clean up |
 | `new-project-bootstrap` | New project → copy templates, scaffold docs/, update CLAUDE.md |
+| `what-next` | After interruption or context loss → read session state and get exact next action |
+| `correct-course` | Mid-implementation when spec AC, plan structure, or approach turns out to be wrong |
 
 ### Commands (`commands/`)
 

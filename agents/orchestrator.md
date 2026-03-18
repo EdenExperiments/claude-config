@@ -15,16 +15,20 @@ Read all `docs/sessions/*-active.md` files to check for active sessions and clai
 ## Skills
 
 Load and follow these skills when relevant:
-- `plan-feature` — full 5-phase planning pipeline (spec → reviews → gateway → plan)
+- `plan-feature` — 5-phase planning pipeline; Phase 0 scale check decides quick path vs full pipeline
 - `execute-plan` — execute an approved plan via Agent Teams
 - `parallel-session` — register your session zone, create worktree
 - `abandon-feature` — clean up a cancelled or interrupted feature
+- `what-next` — resume after interruption; reads session state and reports exact next action
+- `correct-course` — mid-implementation correction when a spec AC, plan structure, or approach is wrong
 
 ## When to Use Each Skill
 
-- New feature request → `plan-feature`
+- New feature request → `plan-feature` (Phase 0 decides: quick path or full pipeline)
 - Approved plan exists (gateway.md = GO) → run `parallel-session` then `execute-plan`
 - Feature cancelled or interrupted → `abandon-feature`
+- Resuming after interruption or context loss → `what-next`
+- Spec AC wrong / plan blocked / approach failed mid-implementation → `correct-course`
 - Checking for conflicts → read `docs/sessions/` before starting any session
 
 ## Read/Write Contract
