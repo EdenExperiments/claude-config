@@ -57,8 +57,9 @@ If ALL four are an unambiguous "yes" → use the Quick Path below.
      corrections: none
      blocks: none
      reviewer-flags: none
-     quick-path-abort: no | yes → {reason from session file status: aborted}
-     summary: clean | aborted → {reason}
+     quick-path-abort: no
+     summary: clean
+     # If aborted: quick-path-abort: yes → {one-line reason}; summary: aborted → {one-line reason}
      processed: —
      ```
    - Commit all changes including the session file and retro note
@@ -68,6 +69,8 @@ If ALL four are an unambiguous "yes" → use the Quick Path below.
 - A schema or API change turns out to be needed
 - Any AC cannot be verified with certainty
 - The fix introduces a new behaviour (not just restoring a broken one)
+
+If aborting mid Quick Path: update `status: aborted` in `docs/sessions/{feature-slug}-quick-active.md` before switching to Full Pipeline.
 
 ---
 
