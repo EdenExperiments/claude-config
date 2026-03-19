@@ -69,7 +69,7 @@ Write facts only — no analysis:
 ## {feature-slug} — {YYYY-MM-DD}
 
 type: full
-corrections: none | 1 spec-level | 1 plan-level | 2 spec-level | etc.
+corrections: none | 1 spec-level | 1 plan-level | 1 spec-level, 1 plan-level | 2 spec-level | etc.
 blocks: none | T2 blocked ({reason}) | T3 blocked ({reason})
 reviewer-flags: none | "{flag 1}" | "{flag 1}", "{flag 2}"
 quick-path-abort: no | yes → {reason}
