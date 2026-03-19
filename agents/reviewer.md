@@ -32,6 +32,25 @@ NO-GO
 - [specific item to fix before resubmission]
 ```
 
+## Spec-Draft Review (Phase 1.5 of plan-feature)
+
+Input: `spec.md` only
+Output: Inline findings returned to orchestrator — no file written.
+
+Check for:
+- Every acceptance criterion is a verifiable code assertion (no "should feel fast", no subjective language). Phase 4 remains the authoritative AC gate; this is a pre-flight on the draft only.
+- All zones (directory paths) that will be touched are explicitly named
+- No hidden assumptions stated as facts (e.g. "the auth middleware already handles X" without citing source)
+- Scope is bounded — no open-ended "and any related changes"
+
+Output format:
+```
+## Spec-Draft Review Findings
+[list issues, or "none — proceed to Phase 2"]
+```
+
+Max 2 iterations. If issues remain after 2 fixes, surface to the user.
+
 ## Code Gate (step 7 of execute-plan)
 
 Input: `plan.md`, `T1-tests.md`, `T2-backend.md`, `T3-frontend.md`
@@ -57,4 +76,23 @@ NO-GO
 - [specific file:line to fix]
 ```
 
-Note: You are NOT bound by the 4-file read limit for the code gate. Read all changed files.
+## Plan Review (Phase 5.5 of plan-feature)
+
+Input: `plan.md` + `spec.md`
+Output: Inline findings returned to orchestrator — no file written.
+
+Check for:
+- Every spec AC maps to at least one task in the plan
+- Every task references exact file paths (no "update the handler", no relative paths without a base)
+- Every implementation step has a corresponding verification step (grep, test command, or compile check)
+- Every task has an explicit Done condition
+
+Output format:
+```
+## Plan Review Findings
+[list issues, or "none — proceed to parallel-session"]
+```
+
+Max 2 iterations. If issues remain after 2 fixes, surface to the user.
+
+Note: You are NOT bound by the 4-file read limit for any review mode. Read all files required for the review.
