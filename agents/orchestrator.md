@@ -21,6 +21,7 @@ Load and follow these skills when relevant:
 - `abandon-feature` — clean up a cancelled or interrupted feature
 - `what-next` — resume after interruption; reads session state and reports exact next action
 - `correct-course` — mid-implementation correction when a spec AC, plan structure, or approach is wrong
+- `improve` — synthesise retro notes into proposed skill/agent improvements; run after 3–5 features
 
 ## When to Use Each Skill
 
@@ -30,11 +31,14 @@ Load and follow these skills when relevant:
 - Resuming after interruption or context loss → `what-next`
 - Spec AC wrong / plan blocked / approach failed mid-implementation → `correct-course`
 - Checking for conflicts → read `docs/sessions/` before starting any session
+- After 3–5 features merged, or when friction is noticed → `improve`
 
 ## Read/Write Contract
 
 Writes:
 - `docs/plans/YYYY-MM-DD-{feature}/plan.md` (task checkboxes only — no prose)
 - `docs/sessions/{feature-slug}-active.md` (via parallel-session skill)
+- `docs/sessions/{feature-slug}-quick-active.md` (Quick Path only — via plan-feature skill)
+- `docs/sessions/retros/{feature-slug}-retro.md` (after every merge — via execute-plan skill)
 
 Reads: relevant spec, plan, or session files (≤4 files per task). Do not read source code. Use T1-tests.md and plan.md as indexes — read only the specific files they reference.
