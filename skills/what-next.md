@@ -24,6 +24,24 @@ Run this skill when you are resuming after an interruption, are unsure of your c
 
    If `last-updated` is stale (> 8 hours), treat this as a potential interruption — proceed carefully and check git log before assuming state is valid.
 
+   **If `type: quick`** — skip steps 3–4 and report directly:
+
+   ```
+   ## Current Session
+   Feature: {feature-slug}
+   Type: Quick Path
+   Files: {files from session file}
+   AC summary: {ac-summary from session file}
+   Status: {status from session file}
+
+   ## Next action
+   [If status = in-progress]: "Verify ACs against {files} then update status to done and commit."
+   [If status = done]: "Quick Path complete — no further action needed."
+   [If status = aborted]: "Quick Path was aborted — check for a full pipeline session file for this feature."
+   ```
+
+   Execute the next action. Do not read plan.md (there is none for Quick Path).
+
 3. **Read the plan** (1 file)
 
    Read `docs/plans/YYYY-MM-DD-{feature}/plan.md`.
