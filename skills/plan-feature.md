@@ -32,11 +32,36 @@ If ALL four are an unambiguous "yes" → use the Quick Path below.
 
 2. **Pause and check for hidden complexity.** Ask yourself: does writing the mini-spec reveal any ambiguity, side effects, or unknowns? If yes — abort Quick Path, use Full Pipeline.
 
-3. **Implement directly.** For a ≤3-file change with clear ACs, the orchestrator or a single specialist agent can implement inline. No T1 tester dispatch needed for trivial one-liner fixes, but write at least 1 test assertion for any logic change.
+3. **Write the Quick Path session file.** Create `docs/sessions/{feature-slug}-quick-active.md`:
+   ```
+   feature: {slug}
+   type: quick
+   files: [list of files to touch]
+   ac-summary: {one-liner from mini-spec What field}
+   started: {YYYY-MM-DD HH:MM}
+   status: in-progress
+   ```
+   No worktree, no plan.md — session file only.
 
-4. **Quick review.** After implementing, re-read the 2–4 ACs and confirm each is met. No gateway.md needed.
+4. **Implement directly.** For a ≤3-file change with clear ACs, the orchestrator or a single specialist agent can implement inline. No T1 tester dispatch needed for trivial one-liner fixes, but write at least 1 test assertion for any logic change.
 
-5. **Commit and done.** No session file, no worktree, no plan.md needed for Quick Path.
+5. **Quick review.** After implementing, re-read the 2–4 ACs and confirm each is met. No gateway.md needed.
+
+6. **Update session status, write Quick Path retro note, and commit.**
+   - Set `status: done` in `docs/sessions/{feature-slug}-quick-active.md`
+   - Write `docs/sessions/retros/{feature-slug}-retro.md` (single source: the quick-active.md file):
+     ```
+     ## {feature-slug} — {YYYY-MM-DD}
+
+     type: quick
+     corrections: none
+     blocks: none
+     reviewer-flags: none
+     quick-path-abort: no | yes → {reason from session file status: aborted}
+     summary: clean | aborted → {reason}
+     processed: —
+     ```
+   - Commit all changes including the session file and retro note
 
 **Abort to Full Pipeline immediately if:**
 - The implementation touches a 4th file
