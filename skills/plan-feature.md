@@ -88,6 +88,16 @@ Steps:
 4. Identify any `packages/*` files that must change
 5. Write spec.md to `docs/specs/YYYY-MM-DD-{feature}/spec.md`
 
+## Phase 1.5 — Spec-Draft Review (dispatch Reviewer in spec-draft mode)
+
+Input: spec.md (draft)
+Output: Inline findings
+
+Dispatch the reviewer agent in spec-draft mode. Wait for findings.
+
+If issues found: fix spec.md, re-dispatch. Max 2 iterations — if still failing after 2 fixes, surface to user.
+If clean ("none — proceed to Phase 2"): continue to Phase 2.
+
 ## Phase 2 — Architecture Review (dispatch Architect agent)
 
 Input: spec.md
@@ -134,5 +144,8 @@ Steps:
    — sequence shared-package tasks before T2/T3
    — mark which tasks can run in parallel
 4. T1 ALWAYS comes before T2 and T3
-5. After writing plan.md: run the `parallel-session` skill to register zone + create worktree
-6. Then run the `execute-plan` skill
+5. After writing plan.md: dispatch reviewer in plan-review mode (Phase 5.5)
+   - If issues found: fix plan.md, re-dispatch. Max 2 iterations — if still failing, surface to user.
+   - If clean ("none — proceed to parallel-session"): continue
+6. Run the `parallel-session` skill to register zone + create worktree
+7. Then run the `execute-plan` skill
