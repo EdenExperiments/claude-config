@@ -45,6 +45,7 @@ Available in every project via `~/.claude/agents/`:
 | `new-project-bootstrap` | New project → copy templates, scaffold docs/, update CLAUDE.md |
 | `what-next` | After interruption or context loss → read session state and get exact next action |
 | `correct-course` | Mid-implementation when spec AC, plan structure, or approach turns out to be wrong |
+| `improve` | After 3–5 merged features → synthesise retro patterns, propose targeted skill/agent edits for approval |
 
 ### Commands (`commands/`)
 
