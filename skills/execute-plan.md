@@ -51,8 +51,32 @@ Use `spawnTeam` to create the team. Assign tasks to teammates. Monitor via task 
 
 8. **On GO**
    - Merge worktree to main
+   - Write retro note to `docs/sessions/retros/{feature-slug}-retro.md` (see format below)
    - Delete `docs/sessions/{feature-slug}-active.md`
    - `git worktree remove ../{branch}`
+
+### Retro Note Format
+
+Sources to read before writing (already available from this session):
+- `docs/plans/YYYY-MM-DD-{feature}/plan.md` — any blocked tasks?
+- `docs/specs/YYYY-MM-DD-{feature}/correction.md` — if it exists
+- `docs/specs/YYYY-MM-DD-{feature}/review.md` — code gate flags
+- `docs/sessions/{feature-slug}-active.md` — metadata (read before deleting)
+
+Write facts only — no analysis:
+
+```
+## {feature-slug} — {YYYY-MM-DD}
+
+type: full
+corrections: none | 1 spec-level | 1 plan-level | 2 spec-level | etc.
+blocks: none | T2 blocked ({reason}) | T3 blocked ({reason})
+reviewer-flags: none | "{flag 1}" | "{flag 1}", "{flag 2}"
+quick-path-abort: no | yes → {reason}
+summary: clean | 1 plan correction | reviewer flagged 2 issues
+processed: —
+# processed: filled in by the improve skill after synthesis
+```
 
 9. **On NO-GO**
    - Read `review.md` findings
