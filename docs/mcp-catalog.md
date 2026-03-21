@@ -39,37 +39,6 @@ Available MCPs and which agents use them.
 | Tailwind CSS | `tailwindcss` |
 
 **Fallback:** If unavailable — use training knowledge + add `// Context7 unavailable` inline comment. Never block.
-
----
-
-## hytale-rag
-
-**Purpose:** Semantic search over Hytale game data, client code, server code, and documentation. Used for Hytale-specific development work.
-
-**Used by:** backend, frontend, tester (any agent working on Hytale projects)
-
-**Available tools:**
-
-| Tool | What it searches |
-|------|-----------------|
-| `mcp__hytale-rag__search_hytale_code` | Server-side game code |
-| `mcp__hytale-rag__search_hytale_client_code` | Client-side game code |
-| `mcp__hytale-rag__search_hytale_docs` | Hytale documentation |
-| `mcp__hytale-rag__search_hytale_gamedata` | Game data / assets |
-| `mcp__hytale-rag__hytale_code_stats` | Index stats for server code |
-| `mcp__hytale-rag__hytale_client_code_stats` | Index stats for client code |
-| `mcp__hytale-rag__hytale_docs_stats` | Index stats for docs |
-| `mcp__hytale-rag__hytale_gamedata_stats` | Index stats for game data |
-
-**How to use:**
-```
-mcp__hytale-rag__search_hytale_docs
-query: "entity spawning"
-→ returns relevant doc chunks
-```
-
-**Fallback:** If unavailable — use training knowledge and note `// hytale-rag unavailable` in context. Never block on MCP availability.
-
 ---
 
 *Add new MCPs here as they are configured. Include: purpose, which agents use it, usage pattern, fallback.*
