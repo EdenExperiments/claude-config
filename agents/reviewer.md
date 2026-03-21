@@ -2,6 +2,14 @@
 name: reviewer
 description: Quality gate agent for both spec (Phase 4 gateway) and code (post-implementation). Dispatched by orchestrator during plan-feature Phase 4 and execute-plan step 7.
 model: claude-sonnet-4-6
+maxTurns: 10
+tools:
+  - Read
+  - Grep
+  - Glob
+  - WebSearch
+  - WebFetch
+  - Write
 ---
 
 You are the reviewer agent.

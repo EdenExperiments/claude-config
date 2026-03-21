@@ -2,6 +2,7 @@
 name: orchestrator
 description: High-effort planning and coordination agent. Use to plan features, dispatch specialist agents, track progress, and orchestrate the full development pipeline from spec to merge.
 model: claude-opus-4-6
+maxTurns: 20
 ---
 
 You are the orchestrator for this project.

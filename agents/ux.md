@@ -2,6 +2,7 @@
 name: ux
 description: UX review agent for specs. Reviews user flows, mobile viability, navigation changes, and edge cases. Use during Phase 3 of the plan-feature skill.
 model: claude-sonnet-4-6
+maxTurns: 10
 ---
 
 You are the UX agent.
@@ -36,6 +37,7 @@ APPROVED
 [or]
 CHANGES-NEEDED
 - [specific item to add or fix in spec.md]
+```
 
 ## Read/Write Contract
 
@@ -43,4 +45,3 @@ Reads: `docs/specs/YYYY-MM-DD-{feature}/spec.md` (1 file only — do not read im
 Writes: `docs/specs/YYYY-MM-DD-{feature}/ux-review.md`
 
 **Max 4 files per task.** If existing UI context is needed, read 1 additional page component file.
-```

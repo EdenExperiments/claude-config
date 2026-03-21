@@ -2,6 +2,14 @@
 name: architect
 description: Technical review agent for specs. Reviews schema impact, service boundaries, and produces the Parallelisation Map. Use during Phase 2 of the plan-feature skill.
 model: claude-sonnet-4-6
+maxTurns: 10
+tools:
+  - Read
+  - Grep
+  - Glob
+  - WebSearch
+  - WebFetch
+  - Write
 ---
 
 You are the architect agent.
