@@ -1,6 +1,6 @@
 # claude-config
 
-Personal Claude Code configuration — global agents, custom skills, agent templates, and an MCP catalog. Installs via symlinks so `git pull` updates all projects instantly.
+Personal Claude Code configuration — global agents, custom skills, slash commands, agent templates, and an MCP catalog. Installs via symlinks so `git pull` updates all projects instantly.
 
 ## Install
 
@@ -9,7 +9,7 @@ git clone git@github.com:EdenExperiments/claude-config.git ~/claude-config
 cd ~/claude-config && ./install.sh
 ```
 
-This symlinks `agents/`, `skills/`, `commands/`, and `templates/` into `~/.claude/`.
+This symlinks `agents/`, `skills/`, `commands/`, and `templates/` into `~/.claude/` and creates `~/.claude/teams/` and `~/.claude/rules/`.
 
 ## Update
 
@@ -34,6 +34,8 @@ Available in every project via `~/.claude/agents/`:
 
 ### Skills (`skills/`)
 
+Skills live in `skills/{name}/SKILL.md` (directory format). Available in every project via `~/.claude/skills/`.
+
 | Skill | When to use |
 |-------|------------|
 | `plan-feature` | New feature request → Phase 0 scale check, then quick path or full 5-phase pipeline |
@@ -49,9 +51,20 @@ Available in every project via `~/.claude/agents/`:
 
 ### Commands (`commands/`)
 
+Slash commands available in every project. Each delegates to the corresponding skill.
+
 | Command | What it does |
 |---------|-------------|
-| `/bootstrap` | Runs `new-project-bootstrap` to set up a new project |
+| `/plan-feature` | Runs `plan-feature` — full 5-phase planning pipeline |
+| `/execute-plan` | Runs `execute-plan` — executes an approved plan |
+| `/what-next` | Runs `what-next` — get bearings after an interruption |
+| `/correct-course` | Runs `correct-course` — mid-implementation course correction |
+| `/abandon-feature` | Runs `abandon-feature` — archive and clean up a cancelled feature |
+| `/parallel-session` | Runs `parallel-session` — register zone and create worktree |
+| `/improve` | Runs `improve` — synthesise retro notes into skill improvements |
+| `/tdd-first` | Runs `tdd-first` — TDD discipline for the T1 tester task |
+| `/use-context7` | Runs `use-context7` — load up-to-date library docs before coding |
+| `/bootstrap` | Runs `new-project-bootstrap` — set up a new project |
 
 ### Agent templates (`templates/agents/`)
 
@@ -64,6 +77,30 @@ cp ~/.claude/templates/agents/tester.md   .claude/agents/tester.md
 ```
 
 See `templates/agents/README.md` for details.
+
+## Agent Teams
+
+`execute-plan` uses Agent Teams for parallel T1/T2/T3 execution. Agent Teams is experimental and requires an env var:
+
+```bash
+# Add to ~/.bashrc or ~/.zshrc
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true
+```
+
+Without this flag, `execute-plan` falls back to sequential single-session execution — the same tasks run in order rather than in parallel.
+
+## Modular project context with `.claude/rules/`
+
+Claude Code auto-loads every `.md` file in `.claude/rules/`. Use this to split a large `CLAUDE.md` into focused, path-scoped rule files:
+
+```
+.claude/rules/
+  backend-conventions.md
+  test-patterns.md
+  api-contracts.md
+```
+
+`install.sh` creates `~/.claude/rules/` for global rules. Per-project rules live in the project's own `.claude/rules/`.
 
 ## Bootstrap a new project
 
@@ -79,5 +116,6 @@ Or manually: copy templates, fill in `<!-- TUNE: -->` markers, run `new-project-
 ```bash
 git clone git@github.com:EdenExperiments/claude-config.git ~/claude-config
 cd ~/claude-config && ./install.sh
+# Add CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true to ~/.bashrc or ~/.zshrc
 # Then clone your project repos — their .claude/ agents are already tuned
 ```
