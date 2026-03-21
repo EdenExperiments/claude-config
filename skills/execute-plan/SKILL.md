@@ -5,6 +5,17 @@ description: Execute an approved implementation plan via Agent Teams. Run after 
 
 # execute-plan Skill
 
+## Prerequisites
+
+Agent Teams mode requires `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true` to be set in your environment. Without it, `spawnTeam` is unavailable.
+
+**Fallback (no Agent Teams):** Run T1, T2, and T3 sequentially in a single session — dispatch each specialist sub-agent in sequence using the `Agent` tool, wait for completion, then proceed to the next step. The code gate (T4) runs the same way in both modes.
+
+To enable Agent Teams, add to your shell profile (`~/.bashrc` or `~/.zshrc`):
+```bash
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true
+```
+
 ## Agent Teams Primer
 
 Agent Teams are independent Claude Code sessions with their own context windows. They coordinate via:

@@ -47,7 +47,7 @@ Add or update `CLAUDE.md` with:
 ### 3. Create docs/ structure
 
 ```bash
-mkdir -p docs/specs/archived docs/plans/archived docs/sessions
+mkdir -p docs/specs/archived docs/plans/archived docs/sessions/retros
 printf "# Abandoned Features\n\n" > docs/sessions/abandoned.md
 ```
 
@@ -66,3 +66,11 @@ Open a new Claude Code session and run the orchestrator agent. Confirm it can:
 - Dispatch the ux agent
 
 If any agent fails to load, check that `~/.claude/agents/` symlink points to `~/claude-config/agents/`.
+
+### 6. Create rules directory (optional)
+
+```bash
+mkdir -p .claude/rules
+```
+
+Each `.md` file in `.claude/rules/` is auto-loaded by Claude — use these to split a large `CLAUDE.md` into focused, path-scoped rule files (e.g., `backend-conventions.md`, `test-patterns.md`).
