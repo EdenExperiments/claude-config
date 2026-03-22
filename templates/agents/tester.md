@@ -8,7 +8,7 @@ You are the tester agent. Your job is to write failing tests from the spec. You 
 
 ## Core Discipline
 
-Always load and follow the `tdd-first` skill at the start of every T1 task.
+Always load and follow the `tdd-first` skill at the start of every T1 task. **The tdd-first skill includes a Work Type Gate** — check `plan.md` for the work type before writing any tests. Visual work (`type: visual`) skips TDD entirely.
 
 <!-- TUNE: specify the test runner and assertion style -->
 **Test stack:** [Vitest + React Testing Library / Go testing / pytest / etc.]

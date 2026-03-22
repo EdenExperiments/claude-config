@@ -7,6 +7,14 @@ description: TDD discipline for the tester agent. Load this skill at the start o
 
 You are writing tests. You are NOT writing implementation code. If you feel the urge to write implementation, stop and message the backend or frontend agent instead.
 
+## Work Type Gate
+
+**Before writing any tests, check `plan.md` for the work type classification.**
+
+- **`type: visual`** → **STOP. Do not write tests.** Visual work (page composition, styling, theme changes, layout, CSS, atmospheric effects) does not go through TDD. Report to the orchestrator: "T1 skipped — work type is visual per D-036." Set task state = `done` immediately.
+- **`type: logic`** → Proceed with all steps below. Write tests for all ACs.
+- **`type: mixed`** → Write tests for **behavioural ACs only** (form submission, data flow, API calls, state changes, validation). **Do NOT write tests for visual ACs** (layout assertions, colour checks, CSS class presence, theme-dependent rendering). In the Coverage Map, note which ACs are visual and excluded: `AC-N ([visual AC text]) → excluded (visual, D-036)`.
+
 ## Steps
 
 1. **Read project test conventions**
@@ -70,5 +78,7 @@ You are writing tests. You are NOT writing implementation code. If you feel the 
 ## Red Flags — Stop and Report Before Writing
 
 - AC that says "should be fast" / "should feel smooth" / "should look good" — not testable
+- AC that asserts visual properties ("card has gradient background", "page uses radial glow") — this is visual work, not testable behaviour. Exclude per D-036.
 - Required test infrastructure missing (no mock for a critical dependency)
 - Test would duplicate existing coverage exactly
+- Work type is `visual` but you are writing tests anyway — re-read the Work Type Gate above

@@ -59,7 +59,7 @@ Output format:
 
 Max 2 iterations. If issues remain after 2 fixes, surface to the user.
 
-## Code Gate (step 7 of execute-plan)
+## Code Gate (step 7 of execute-plan — logic/API work)
 
 Input: `plan.md`, `T1-tests.md`, `T2-backend.md`, `T3-frontend.md`
 PLUS: all source files listed in `## Files Changed` sections of T2 and T3.
@@ -76,6 +76,42 @@ Output format:
 ```
 ## Code Review Findings
 [list issues by severity: BLOCKER / MAJOR / MINOR — or "none"]
+
+## Verdict
+GO
+[or]
+NO-GO
+- [specific file:line to fix]
+```
+
+## Visual Review (step 7 of execute-plan — UI/visual work)
+
+Input: `plan.md`, `T3-frontend.md`
+PLUS: all source files listed in `## Files Changed` section of T3.
+PLUS: style guide and page guide files referenced in plan.md (if they exist).
+
+Output: `docs/specs/YYYY-MM-DD-{feature}/visual-review.md`
+
+This mode replaces the Code Gate for work marked `type: visual` in plan.md. No T1-tests.md is expected — visual work does not go through the TDD gate.
+
+Check for:
+- **Token compliance**: all colours, fonts, radii, shadows use CSS custom properties (e.g. `var(--color-accent)`) — never hardcoded Tailwind colour classes or hex values
+- **Theme compatibility**: components work across all active themes. No theme-specific hardcoding unless inside a `[data-theme="..."]` scope or a variant file
+- **Three-layer architecture**: CSS-only changes stay in layers 1–2 (tokens/theme CSS). Component variants (layer 3) are only used for structural differences, not colour/font swaps
+- **Accessibility**: focus-visible states present, semantic HTML used, contrast ratios appropriate for dark themes, touch targets meet minimum size
+- **Page composition**: if a page guide exists, verify the section order, divider placement, and background treatment match the guide
+- **No regression**: shared components in `packages/ui/` haven't had their interfaces broken
+
+Output format:
+```
+## Visual Review Findings
+[list issues by severity: BLOCKER / MAJOR / MINOR — or "none"]
+
+## Token Compliance
+[PASS / FAIL — list any hardcoded values found]
+
+## Theme Compatibility
+[PASS / FAIL — list any theme-specific issues]
 
 ## Verdict
 GO

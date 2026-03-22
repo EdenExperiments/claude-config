@@ -37,10 +37,12 @@ Use `spawnTeam` to create the team. Assign tasks to teammates. Monitor via task 
    git rebase main
    ```
 
-3. **Dispatch tester → T1**
-   - Assign T1 to tester teammate
+3. **Dispatch tester → T1 (logic and mixed work types only)**
+   - **Skip this step entirely if plan.md has `type: visual`.** Proceed to step 4.
+   - For `type: logic` or `type: mixed`: assign T1 to tester teammate
    - Wait for task state = `done`
    - T1 done means: test code committed to worktree, T1-tests.md manifest exists, tests verified failing
+   - For `type: mixed`: T1 tests cover behavioural ACs only (form submission, data flow, API calls). Visual ACs are not tested — they are verified by the reviewer in Visual Review mode at step 7.
    - Update `last-updated` in session file
 
 4. **Handle shared-package tasks (if any)**
@@ -50,15 +52,17 @@ Use `spawnTeam` to create the team. Assign tasks to teammates. Monitor via task 
 
 5. **Dispatch backend (T2) and frontend (T3)**
    - Per Parallelisation Map: parallel where allowed, sequential where required
+   - For `type: visual`: typically only T3 (frontend) is dispatched — no T2 unless the plan explicitly includes backend tasks
    - Use SendMessage to communicate blockers between teammates
-   - Task state = `blocked` means tests are failing — do not wait indefinitely, surface to user
-   - Update `last-updated` in session file when both T2 and T3 = done
+   - Task state = `blocked` means tests are failing (logic) or implementation is stuck (visual) — do not wait indefinitely, surface to user
+   - Update `last-updated` in session file when tasks = done
 
 6. **Rebase from main**
 
-7. **Dispatch reviewer → code gate**
-   - Reviewer reads plan.md, T1-tests.md, T2-backend.md, T3-frontend.md
-   - Reviewer also reads all source files in `## Files Changed` sections
+7. **Dispatch reviewer → appropriate gate based on work type**
+   - **`type: logic`**: Reviewer runs **Code Gate** mode — reads plan.md, T1-tests.md, T2-backend.md, T3-frontend.md + all source files in `## Files Changed` sections
+   - **`type: visual`**: Reviewer runs **Visual Review** mode — reads plan.md, T3-frontend.md + all source files in `## Files Changed` + style guide and page guide files referenced in plan.md. No T1-tests.md expected.
+   - **`type: mixed`**: Reviewer runs **both gates** — Code Gate for logic portions (T1 tests must pass) AND Visual Review for visual portions (token compliance, theme compatibility). Both must produce GO for the feature to pass.
 
 8. **On GO**
    - Merge worktree to main

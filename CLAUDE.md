@@ -25,8 +25,15 @@ This repo provides a global agentic development system. Every project benefits f
 |-------|------|------|
 | `orchestrator` | `agents/orchestrator.md` | Planning, dispatch, coordination — runs `plan-feature` and `execute-plan` |
 | `architect` | `agents/architect.md` | Phase 2 spec review — schema, service boundaries, Parallelisation Map |
-| `reviewer` | `agents/reviewer.md` | Phase 1.5 spec-draft, Phase 4 spec gateway, Phase 5.5 plan review, code gate |
-| `ux` | `agents/ux.md` | Phase 3 UX review — flows, mobile viability, edge cases |
+| `reviewer` | `agents/reviewer.md` | Phase 1.5 spec-draft, Phase 4 spec gateway, Phase 5.5 plan review, **code gate (logic) OR visual review (UI)** |
+| `ux` | `agents/ux.md` | Phase 3 UX review — flows, mobile viability, edge cases. **Does NOT review visual design** |
+
+## Pipeline Split (D-036)
+
+Work is classified during Phase 0 of `plan-feature`:
+- **`type: logic`** — TDD gate applies. Tester writes failing tests, reviewer runs Code Gate.
+- **`type: visual`** — No TDD. Reviewer runs Visual Review (token compliance, theme compatibility, accessibility).
+- **`type: mixed`** — TDD for behavioural ACs only. Both Code Gate and Visual Review must pass.
 
 ## Skills
 

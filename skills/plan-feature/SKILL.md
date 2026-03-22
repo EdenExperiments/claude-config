@@ -7,7 +7,9 @@ description: Full 5-phase planning pipeline. Run this skill when a new feature i
 
 Run this skill when a feature is requested. Do not write any code until Phase 5 (or the Quick Path) produces plan.md and the orchestrator has run parallel-session.
 
-## Phase 0 — Scale Check
+## Phase 0 — Scale Check and Pipeline Routing
+
+### Step 0a — Scale Check
 
 Answer all four questions before starting:
 
@@ -19,6 +21,16 @@ Answer all four questions before starting:
 **If any answer is "no" or "maybe" → use the Full Pipeline (Phase 1 below). Do not try to force it into the Quick Path.**
 
 If ALL four are an unambiguous "yes" → use the Quick Path below.
+
+### Step 0b — Work Type Classification (D-036)
+
+After determining the pipeline (Quick Path or Full), classify the work type:
+
+- **`type: logic`** — Business logic, API endpoints, data flow, state management, backend changes. **→ TDD gate applies.** T1 tester dispatch is required.
+- **`type: visual`** — Page composition, styling, theme work, layout changes, CSS, atmospheric effects, design system changes. **→ Visual review gate applies.** No T1 tester dispatch. The reviewer runs in Visual Review mode instead of Code Gate mode.
+- **`type: mixed`** — Both logic and visual changes. **→ TDD gate applies to the logic portions.** T1 tests cover the behavioural ACs only (form submission, data flow, API calls). Visual ACs are reviewed by the reviewer in Visual Review mode. Both gates must pass.
+
+Record the work type in plan.md (Full Pipeline) or the mini-spec (Quick Path). This classification determines how `execute-plan` dispatches agents.
 
 ---
 
