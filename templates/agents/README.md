@@ -1,5 +1,7 @@
 # Agent Templates
 
+## TODO: Consider making frontend agent to Opus due to increased frontend capabilities specifically for Opus compared to Sonnet. Should be fine for my plan and stay within 5 hour usage in evenings. 
+
 These templates are the starting point for project-tuned agents. Copy them into your project's `.claude/agents/` directory, then fill in every `<!-- TUNE: -->` marker.
 
 ## How to use
